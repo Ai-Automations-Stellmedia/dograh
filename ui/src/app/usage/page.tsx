@@ -333,300 +333,300 @@ export default function UsagePage() {
                         <h1 className="text-3xl font-bold mb-2">Agent Runs</h1>
                         <p className="text-muted-foreground">See all your Agent Runs across all Voice Agents. You can use filters to filter out required Agent Runs.</p>
                     </div>
-                        <div className="flex items-center gap-2">
-                            <Globe className="h-4 w-4 text-muted-foreground" />
-                            <div className="w-[300px]">
-                                <TimezoneSelect
-                                    instanceId={timezoneSelectId}
-                                    value={selectedTimezone}
-                                    onChange={handleTimezoneChange}
-                                    isDisabled={savingTimezone || userConfigLoading}
-                                    placeholder={userConfigLoading ? "Loading..." : "Select timezone"}
-                                    styles={{
-                                        control: (base, state) => ({
-                                            ...base,
-                                            minHeight: '36px',
-                                            fontSize: '14px',
-                                            backgroundColor: 'var(--background)',
-                                            borderColor: state.isFocused ? 'var(--ring)' : 'var(--border)',
-                                            boxShadow: state.isFocused ? '0 0 0 2px color-mix(in srgb, var(--ring) 20%, transparent)' : 'none',
-                                            '&:hover': {
-                                                borderColor: 'var(--border)',
-                                            },
-                                        }),
-                                        menu: (base) => ({
-                                            ...base,
-                                            zIndex: 9999,
-                                            backgroundColor: 'var(--popover)',
-                                            border: '1px solid var(--border)',
-                                            boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
-                                        }),
-                                        menuList: (base) => ({
-                                            ...base,
-                                            backgroundColor: 'var(--popover)',
-                                            padding: 0,
-                                        }),
-                                        option: (base, state) => ({
-                                            ...base,
-                                            backgroundColor: state.isSelected
-                                                ? 'var(--accent)'
-                                                : state.isFocused
+                    <div className="flex items-center gap-2">
+                        <Globe className="h-4 w-4 text-muted-foreground" />
+                        <div className="w-[300px]">
+                            <TimezoneSelect
+                                instanceId={timezoneSelectId}
+                                value={selectedTimezone}
+                                onChange={handleTimezoneChange}
+                                isDisabled={savingTimezone || userConfigLoading}
+                                placeholder={userConfigLoading ? "Loading..." : "Select timezone"}
+                                styles={{
+                                    control: (base, state) => ({
+                                        ...base,
+                                        minHeight: '36px',
+                                        fontSize: '14px',
+                                        backgroundColor: 'var(--background)',
+                                        borderColor: state.isFocused ? 'var(--ring)' : 'var(--border)',
+                                        boxShadow: state.isFocused ? '0 0 0 2px color-mix(in srgb, var(--ring) 20%, transparent)' : 'none',
+                                        '&:hover': {
+                                            borderColor: 'var(--border)',
+                                        },
+                                    }),
+                                    menu: (base) => ({
+                                        ...base,
+                                        zIndex: 9999,
+                                        backgroundColor: 'var(--popover)',
+                                        border: '1px solid var(--border)',
+                                        boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
+                                    }),
+                                    menuList: (base) => ({
+                                        ...base,
+                                        backgroundColor: 'var(--popover)',
+                                        padding: 0,
+                                    }),
+                                    option: (base, state) => ({
+                                        ...base,
+                                        backgroundColor: state.isSelected
+                                            ? 'var(--accent)'
+                                            : state.isFocused
                                                 ? 'var(--accent)'
                                                 : 'var(--popover)',
+                                        color: 'var(--foreground)',
+                                        cursor: 'pointer',
+                                        '&:active': {
+                                            backgroundColor: 'var(--accent)',
+                                        },
+                                    }),
+                                    singleValue: (base) => ({
+                                        ...base,
+                                        color: 'var(--foreground)',
+                                    }),
+                                    input: (base) => ({
+                                        ...base,
+                                        color: 'var(--foreground)',
+                                    }),
+                                    placeholder: (base) => ({
+                                        ...base,
+                                        color: 'var(--muted-foreground)',
+                                    }),
+                                    indicatorSeparator: (base) => ({
+                                        ...base,
+                                        backgroundColor: 'var(--border)',
+                                    }),
+                                    dropdownIndicator: (base) => ({
+                                        ...base,
+                                        color: 'var(--muted-foreground)',
+                                        '&:hover': {
                                             color: 'var(--foreground)',
-                                            cursor: 'pointer',
-                                            '&:active': {
-                                                backgroundColor: 'var(--accent)',
-                                            },
-                                        }),
-                                        singleValue: (base) => ({
-                                            ...base,
-                                            color: 'var(--foreground)',
-                                        }),
-                                        input: (base) => ({
-                                            ...base,
-                                            color: 'var(--foreground)',
-                                        }),
-                                        placeholder: (base) => ({
-                                            ...base,
-                                            color: 'var(--muted-foreground)',
-                                        }),
-                                        indicatorSeparator: (base) => ({
-                                            ...base,
-                                            backgroundColor: 'var(--border)',
-                                        }),
-                                        dropdownIndicator: (base) => ({
-                                            ...base,
-                                            color: 'var(--muted-foreground)',
-                                            '&:hover': {
-                                                color: 'var(--foreground)',
-                                            },
-                                        }),
-                                    }}
-                                />
-                            </div>
+                                        },
+                                    }),
+                                }}
+                            />
                         </div>
                     </div>
                 </div>
+            </div>
 
-                {/* MPS Credits Card */}
-                <Card className="mb-6">
-                    <CardHeader>
-                        <CardTitle>Dograh Model Credits</CardTitle>
-                        <CardDescription>
-                            These track usage of Dograh models using Dograh Service Keys.
-                        </CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                        {isLoadingCredits ? (
-                            <div className="animate-pulse space-y-4">
-                                <div className="h-4 bg-muted rounded w-1/4"></div>
-                                <div className="h-8 bg-muted rounded"></div>
-                                <div className="h-4 bg-muted rounded w-1/3"></div>
-                            </div>
-                        ) : mpsCredits ? (
-                            <div className="space-y-4">
-                                <div className="flex justify-between items-baseline">
-                                    <div>
-                                        <p className="text-2xl font-bold">
-                                            {mpsCredits.total_credits_used.toFixed(2)} <span className="text-lg font-normal text-muted-foreground">/ {mpsCredits.total_quota.toFixed(2)}</span>
-                                        </p>
-                                        <p className="text-sm text-muted-foreground">Credits Used</p>
-                                    </div>
-                                    <div className="text-right">
-                                        <p className="text-lg font-semibold">{mpsCredits.remaining_credits.toFixed(2)}</p>
-                                        <p className="text-sm text-muted-foreground">Remaining</p>
-                                    </div>
+            {/* MPS Credits Card */}
+            <Card className="mb-6">
+                <CardHeader>
+                    <CardTitle>Stella Model Credits</CardTitle>
+                    <CardDescription>
+                        These track usage of Stella models using Stella Service Keys.
+                    </CardDescription>
+                </CardHeader>
+                <CardContent>
+                    {isLoadingCredits ? (
+                        <div className="animate-pulse space-y-4">
+                            <div className="h-4 bg-muted rounded w-1/4"></div>
+                            <div className="h-8 bg-muted rounded"></div>
+                            <div className="h-4 bg-muted rounded w-1/3"></div>
+                        </div>
+                    ) : mpsCredits ? (
+                        <div className="space-y-4">
+                            <div className="flex justify-between items-baseline">
+                                <div>
+                                    <p className="text-2xl font-bold">
+                                        {mpsCredits.total_credits_used.toFixed(2)} <span className="text-lg font-normal text-muted-foreground">/ {mpsCredits.total_quota.toFixed(2)}</span>
+                                    </p>
+                                    <p className="text-sm text-muted-foreground">Credits Used</p>
                                 </div>
-
-                                {mpsCredits.total_quota > 0 && (
-                                    <Progress value={(mpsCredits.total_credits_used / mpsCredits.total_quota) * 100} className="h-3" />
-                                )}
+                                <div className="text-right">
+                                    <p className="text-lg font-semibold">{mpsCredits.remaining_credits.toFixed(2)}</p>
+                                    <p className="text-sm text-muted-foreground">Remaining</p>
+                                </div>
                             </div>
-                        ) : (
-                            <p className="text-muted-foreground">No Dograh service keys configured. Set up a service key in your model configuration to see usage.</p>
-                        )}
-                    </CardContent>
-                </Card>
 
-                {/* Daily Usage Table - Only for paid organizations */}
-                {organizationPricing?.price_per_second_usd && (
-                    <div className="mb-6">
-                        <DailyUsageTable
-                            data={dailyUsage}
-                            isLoading={isLoadingDaily}
-                        />
+                            {mpsCredits.total_quota > 0 && (
+                                <Progress value={(mpsCredits.total_credits_used / mpsCredits.total_quota) * 100} className="h-3" />
+                            )}
+                        </div>
+                    ) : (
+                        <p className="text-muted-foreground">No Stella service keys configured. Set up a service key in your model configuration to see usage.</p>
+                    )}
+                </CardContent>
+            </Card>
+
+            {/* Daily Usage Table - Only for paid organizations */}
+            {organizationPricing?.price_per_second_usd && (
+                <div className="mb-6">
+                    <DailyUsageTable
+                        data={dailyUsage}
+                        isLoading={isLoadingDaily}
+                    />
+                </div>
+            )}
+
+            {/* Filter Builder */}
+            <div className="mb-6 space-y-3">
+                <FilterBuilder
+                    availableAttributes={usageFilterAttributes}
+                    activeFilters={activeFilters}
+                    onFiltersChange={handleFiltersChange}
+                    onApplyFilters={handleApplyFilters}
+                    onClearFilters={handleClearFilters}
+                    isExecuting={isExecutingFilters}
+                />
+                {appliedFilters.length > 0 && (
+                    <div className="flex justify-end">
+                        <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={handleDownloadReport}
+                            disabled={isDownloadingReport}
+                        >
+                            <Download className="h-4 w-4 mr-2" />
+                            {isDownloadingReport ? 'Preparing...' : 'Download Filtered Results'}
+                        </Button>
                     </div>
                 )}
+            </div>
 
-                {/* Filter Builder */}
-                <div className="mb-6 space-y-3">
-                    <FilterBuilder
-                        availableAttributes={usageFilterAttributes}
-                        activeFilters={activeFilters}
-                        onFiltersChange={handleFiltersChange}
-                        onApplyFilters={handleApplyFilters}
-                        onClearFilters={handleClearFilters}
-                        isExecuting={isExecutingFilters}
-                    />
-                    {appliedFilters.length > 0 && (
-                        <div className="flex justify-end">
-                            <Button
-                                variant="outline"
-                                size="sm"
-                                onClick={handleDownloadReport}
-                                disabled={isDownloadingReport}
-                            >
-                                <Download className="h-4 w-4 mr-2" />
-                                {isDownloadingReport ? 'Preparing...' : 'Download Filtered Results'}
-                            </Button>
+            {/* Usage History */}
+            <Card>
+                <CardHeader>
+                    <div className="flex justify-between items-start">
+                        <div className="space-y-1.5">
+                            <CardTitle>All Runs</CardTitle>
+                            <CardDescription>
+                                Every agent run across your organization, with usage details
+                            </CardDescription>
                         </div>
-                    )}
-                </div>
-
-                {/* Usage History */}
-                <Card>
-                    <CardHeader>
-                        <div className="flex justify-between items-start">
-                            <div className="space-y-1.5">
-                                <CardTitle>All Runs</CardTitle>
-                                <CardDescription>
-                                    Every agent run across your organization, with usage details
-                                </CardDescription>
-                            </div>
+                    </div>
+                </CardHeader>
+                <CardContent>
+                    {isLoadingHistory ? (
+                        <div className="animate-pulse space-y-3">
+                            {[...Array(5)].map((_, i) => (
+                                <div key={i} className="h-12 bg-muted rounded"></div>
+                            ))}
                         </div>
-                    </CardHeader>
-                    <CardContent>
-                        {isLoadingHistory ? (
-                            <div className="animate-pulse space-y-3">
-                                {[...Array(5)].map((_, i) => (
-                                    <div key={i} className="h-12 bg-muted rounded"></div>
-                                ))}
-                            </div>
-                        ) : usageHistory && usageHistory.runs.length > 0 ? (
-                            <>
-                                <div className="bg-card border rounded-lg overflow-hidden shadow-sm">
-                                    <Table>
-                                        <TableHeader>
-                                            <TableRow className="bg-muted/50">
-                                                <TableHead className="font-semibold">Run ID</TableHead>
-                                                <TableHead className="font-semibold">Agent Name</TableHead>
-                                                <TableHead className="font-semibold">Call Type</TableHead>
-                                                <TableHead className="font-semibold">Phone Number</TableHead>
-                                                <TableHead className="font-semibold">Disposition</TableHead>
-                                                <TableHead className="font-semibold">Date</TableHead>
-                                                <TableHead className="font-semibold text-right">Duration</TableHead>
-                                                <TableHead className="font-semibold text-right">
-                                                    {organizationPricing?.price_per_second_usd ? 'Cost (USD)' : 'Tokens'}
-                                                </TableHead>
-                                                <TableHead className="font-semibold">Actions</TableHead>
-                                            </TableRow>
-                                        </TableHeader>
-                                        <TableBody>
-                                            {usageHistory.runs.map((run) => (
-                                                <TableRow
-                                                    key={run.id}
+                    ) : usageHistory && usageHistory.runs.length > 0 ? (
+                        <>
+                            <div className="bg-card border rounded-lg overflow-hidden shadow-sm">
+                                <Table>
+                                    <TableHeader>
+                                        <TableRow className="bg-muted/50">
+                                            <TableHead className="font-semibold">Run ID</TableHead>
+                                            <TableHead className="font-semibold">Agent Name</TableHead>
+                                            <TableHead className="font-semibold">Call Type</TableHead>
+                                            <TableHead className="font-semibold">Phone Number</TableHead>
+                                            <TableHead className="font-semibold">Disposition</TableHead>
+                                            <TableHead className="font-semibold">Date</TableHead>
+                                            <TableHead className="font-semibold text-right">Duration</TableHead>
+                                            <TableHead className="font-semibold text-right">
+                                                {organizationPricing?.price_per_second_usd ? 'Cost (USD)' : 'Tokens'}
+                                            </TableHead>
+                                            <TableHead className="font-semibold">Actions</TableHead>
+                                        </TableRow>
+                                    </TableHeader>
+                                    <TableBody>
+                                        {usageHistory.runs.map((run) => (
+                                            <TableRow
+                                                key={run.id}
+                                            >
+                                                <TableCell
+                                                    className="font-mono text-sm cursor-pointer hover:underline"
+                                                    onClick={() => handleRowClick(run)}
                                                 >
-                                                    <TableCell
-                                                        className="font-mono text-sm cursor-pointer hover:underline"
-                                                        onClick={() => handleRowClick(run)}
-                                                    >
-                                                        #{run.id}
-                                                    </TableCell>
-                                                    <TableCell>{run.workflow_name || 'Unknown'}</TableCell>
-                                                    <TableCell>
-                                                        <CallTypeCell mode={run.mode} callType={run.call_type} />
-                                                    </TableCell>
-                                                    <TableCell className="text-sm">
-                                                        {(run.call_type === 'inbound'
-                                                            ? run.caller_number
-                                                            : run.called_number) || '-'}
-                                                    </TableCell>
-                                                    <TableCell>
-                                                        {run.disposition ? (
-                                                            <Badge variant="default">
-                                                                {run.disposition}
-                                                            </Badge>
-                                                        ) : (
-                                                            <span className="text-sm text-muted-foreground">-</span>
-                                                        )}
-                                                    </TableCell>
-                                                    <TableCell>{formatDateTime(run.created_at)}</TableCell>
-                                                    <TableCell className="text-right">
-                                                        {formatDuration(run.call_duration_seconds)}
-                                                    </TableCell>
-                                                    <TableCell className="text-right font-medium">
-                                                        {organizationPricing?.price_per_second_usd && run.charge_usd !== undefined && run.charge_usd !== null
-                                                            ? `$${run.charge_usd.toFixed(2)}`
-                                                            : run.dograh_token_usage.toLocaleString()
-                                                        }
-                                                    </TableCell>
-                                                    <TableCell>
-                                                        <MediaPreviewButton
-                                                            recordingUrl={run.recording_url}
-                                                            transcriptUrl={run.transcript_url}
-                                                            runId={run.id}
-                                                            onOpenPreview={mediaPreview.openPreview}
-                                                        />
-                                                    </TableCell>
-                                                </TableRow>
-                                            ))}
-                                        </TableBody>
-                                    </Table>
+                                                    #{run.id}
+                                                </TableCell>
+                                                <TableCell>{run.workflow_name || 'Unknown'}</TableCell>
+                                                <TableCell>
+                                                    <CallTypeCell mode={run.mode} callType={run.call_type} />
+                                                </TableCell>
+                                                <TableCell className="text-sm">
+                                                    {(run.call_type === 'inbound'
+                                                        ? run.caller_number
+                                                        : run.called_number) || '-'}
+                                                </TableCell>
+                                                <TableCell>
+                                                    {run.disposition ? (
+                                                        <Badge variant="default">
+                                                            {run.disposition}
+                                                        </Badge>
+                                                    ) : (
+                                                        <span className="text-sm text-muted-foreground">-</span>
+                                                    )}
+                                                </TableCell>
+                                                <TableCell>{formatDateTime(run.created_at)}</TableCell>
+                                                <TableCell className="text-right">
+                                                    {formatDuration(run.call_duration_seconds)}
+                                                </TableCell>
+                                                <TableCell className="text-right font-medium">
+                                                    {organizationPricing?.price_per_second_usd && run.charge_usd !== undefined && run.charge_usd !== null
+                                                        ? `$${run.charge_usd.toFixed(2)}`
+                                                        : run.dograh_token_usage.toLocaleString()
+                                                    }
+                                                </TableCell>
+                                                <TableCell>
+                                                    <MediaPreviewButton
+                                                        recordingUrl={run.recording_url}
+                                                        transcriptUrl={run.transcript_url}
+                                                        runId={run.id}
+                                                        onOpenPreview={mediaPreview.openPreview}
+                                                    />
+                                                </TableCell>
+                                            </TableRow>
+                                        ))}
+                                    </TableBody>
+                                </Table>
+                            </div>
+
+                            {/* Summary */}
+                            {appliedFilters.length > 0 && (
+                                <div className="mt-4 p-3 bg-muted rounded-md">
+                                    <p className="text-sm text-muted-foreground">
+                                        Total for filtered period: <span className="font-semibold text-foreground">
+                                            {usageHistory.total_dograh_tokens.toLocaleString()} Stella Tokens
+                                        </span>
+                                        {' • '}
+                                        <span className="font-semibold text-foreground">
+                                            {formatDuration(usageHistory.total_duration_seconds)}
+                                        </span>
+                                    </p>
                                 </div>
+                            )}
 
-                                {/* Summary */}
-                                {appliedFilters.length > 0 && (
-                                    <div className="mt-4 p-3 bg-muted rounded-md">
-                                        <p className="text-sm text-muted-foreground">
-                                            Total for filtered period: <span className="font-semibold text-foreground">
-                                                {usageHistory.total_dograh_tokens.toLocaleString()} Dograh Tokens
-                                            </span>
-                                            {' • '}
-                                            <span className="font-semibold text-foreground">
-                                                {formatDuration(usageHistory.total_duration_seconds)}
-                                            </span>
-                                        </p>
+                            {/* Pagination */}
+                            {usageHistory.total_pages > 1 && (
+                                <div className="flex items-center justify-between mt-6">
+                                    <p className="text-sm text-muted-foreground">
+                                        Page {usageHistory.page} of {usageHistory.total_pages} ({usageHistory.total_count} total runs)
+                                    </p>
+                                    <div className="flex gap-2">
+                                        <Button
+                                            variant="outline"
+                                            size="sm"
+                                            onClick={() => handlePageChange(currentPage - 1)}
+                                            disabled={currentPage === 1}
+                                        >
+                                            <ChevronLeft className="h-4 w-4" />
+                                            Previous
+                                        </Button>
+                                        <Button
+                                            variant="outline"
+                                            size="sm"
+                                            onClick={() => handlePageChange(currentPage + 1)}
+                                            disabled={currentPage === usageHistory.total_pages}
+                                        >
+                                            Next
+                                            <ChevronRight className="h-4 w-4" />
+                                        </Button>
                                     </div>
-                                )}
+                                </div>
+                            )}
+                        </>
+                    ) : (
+                        <p className="text-center py-8 text-muted-foreground">No runs found</p>
+                    )}
+                </CardContent>
+            </Card>
 
-                                {/* Pagination */}
-                                {usageHistory.total_pages > 1 && (
-                                    <div className="flex items-center justify-between mt-6">
-                                        <p className="text-sm text-muted-foreground">
-                                            Page {usageHistory.page} of {usageHistory.total_pages} ({usageHistory.total_count} total runs)
-                                        </p>
-                                        <div className="flex gap-2">
-                                            <Button
-                                                variant="outline"
-                                                size="sm"
-                                                onClick={() => handlePageChange(currentPage - 1)}
-                                                disabled={currentPage === 1}
-                                            >
-                                                <ChevronLeft className="h-4 w-4" />
-                                                Previous
-                                            </Button>
-                                            <Button
-                                                variant="outline"
-                                                size="sm"
-                                                onClick={() => handlePageChange(currentPage + 1)}
-                                                disabled={currentPage === usageHistory.total_pages}
-                                            >
-                                                Next
-                                                <ChevronRight className="h-4 w-4" />
-                                            </Button>
-                                        </div>
-                                    </div>
-                                )}
-                            </>
-                        ) : (
-                            <p className="text-center py-8 text-muted-foreground">No runs found</p>
-                        )}
-                    </CardContent>
-                </Card>
-
-                {/* Media Preview Dialog */}
-                {mediaPreview.dialog}
+            {/* Media Preview Dialog */}
+            {mediaPreview.dialog}
         </div>
     );
 }

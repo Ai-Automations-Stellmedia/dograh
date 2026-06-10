@@ -21,6 +21,11 @@ const nextConfig: NextConfig = {
         source: "/ingest/decide",
         destination: "https://us.i.posthog.com/decide",
       },
+      // Proxy API calls to the backend when running locally (avoids CORS)
+      {
+        source: "/api/v1/:path*",
+        destination: `${process.env.BACKEND_URL || "http://localhost:8000"}/api/v1/:path*`,
+      },
     ];
   },
   // This is required to support PostHog trailing slash API requests
